@@ -11,6 +11,6 @@ Feature: Számlaegyenleg változtatása
       And "Macska"-nak van új számlája
     When "Zsolt" számlájához adunk 100 Ft-ot
       And "Macska" számlájához adunk 200 Ft-ot
-      And "Zsolt" számlájához adunk 10 Ft-ot
+      And "Zsolt" számlájához adunk -10 Ft-ot
     Then "Zsolt" számlaegyenlege 90 Ft lesz
       And "Macska" számlaegyenlege 200 Ft lesz
