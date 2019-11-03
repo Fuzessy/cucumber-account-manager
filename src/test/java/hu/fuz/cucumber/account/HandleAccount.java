@@ -7,17 +7,17 @@ import io.cucumber.java.en.When;
 
 public class HandleAccount {
 
-    @Given("\\((.*)\\)-nak van új számlája")
+    @Given("{string}-nak van új számlája")
     public void createAccount(String userName){
         System.out.println("username : " + userName);
     }
 
-    @When("\\((.*)\\) számláhához adunk (\\d+) Ft-ot")
-    public void modifyAccountBalance(String userName, long amount){
+    @When("{string} számlájához adunk {int} Ft-ot")
+    public void modifyAccountBalance(String userName, int amount){
         System.out.println("username : " + userName +" | amount : " + amount);
     }
-    @Then("\\((.*)\\) számlaegyenlege (\\d+) Ft lesz")
-    public void checkAccountBalance(String userName, long amount){
+    @Then("{string} számlaegyenlege {int} Ft lesz")
+    public void checkAccountBalance(String userName, int amount){
         System.out.println("username : " + userName + " | amount : " + amount);
     }
 }
