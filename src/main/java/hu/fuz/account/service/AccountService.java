@@ -28,4 +28,8 @@ public class AccountService {
     }
 
 
+    public void createTransaction(String fromUser, String toUser, int amount) {
+        modifyBalance(fromUser,-1 * amount);
+        modifyBalance(toUser,amount);
+    }
 }
