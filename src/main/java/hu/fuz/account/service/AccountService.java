@@ -21,6 +21,9 @@ public class AccountService {
     }
 
     public void modifyBalance(String userName, int amount) {
-
+        if(accounts.get(userName) != null){
+            Account account = accounts.get(userName);
+            account.setAmount( account.getAmount() + amount);
+        }
     }
 }
