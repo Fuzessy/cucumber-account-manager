@@ -53,6 +53,14 @@
       <artifactId>cucumber-junit</artifactId>
       <version>${cucumberVersion}</version>
     </dependency>
+
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-spring</artifactId>
+      <version>${cucumberVersion}</version>
+      <scope>test</scope>
+    </dependency>
+
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>

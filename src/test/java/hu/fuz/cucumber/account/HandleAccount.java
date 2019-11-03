@@ -2,16 +2,21 @@ package hu.fuz.cucumber.account;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import hu.fuz.StartAccountManagerWeb;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.springframework.boot.test.context.SpringBootContextLoader;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -19,13 +24,19 @@ import java.util.Map;
 
 import static junit.framework.TestCase.assertEquals;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(
+        webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@ContextConfiguration(classes = StartAccountManagerWeb.class, loader = SpringBootContextLoader.class)
 public class HandleAccount {
 
-    @LocalServerPort
-    private int PORT;
+    private int PORT = 8080;
     private String SERVER_URL = "http://localhost:" + PORT;
     private final ObjectMapper objectMapper = new ObjectMapper();
+
+    @Before
+    private void init(){
+        this.SERVER_URL = "http://localhost:" + PORT;
+    }
 
     @Given("{string}-nak van új számlája")
     public void createAccount(String userName){
