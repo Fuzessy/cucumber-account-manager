@@ -48,7 +48,7 @@ public class HandleAccount {
                 restTemplate.postForEntity(
                         SERVER_URL + "/account/add",
                         "{ " +
-                                "  userName: '" + userName+ "' " +
+                                "  userName: '" + userName+ "', " +
                                 "  amount: " +  amount +
                                 "} ",
                         Void.class);
@@ -91,17 +91,32 @@ public class HandleAccount {
                     row.get("Kedvezményezett"),
                     row.get("Összeg")).forEach(a -> System.out.print(a + " | "));
             System.out.println("");
+
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity response =
+                    restTemplate.postForEntity(
+                            SERVER_URL + "/transaction" ,
+                            "{" +
+                                    "  userFrom: '" + row.get("Kezdeményező") + "', " +
+                                    "  userTo:   '" + row.get("Kedvezményezett") + "', " +
+                                    "  amount:    " + row.get("Összeg") +
+                                    "}",
+                            Void.class);
+
+            assertEquals(response.getStatusCode(),HttpStatus.OK);
         }
     }
 
     @Then("A felhasználók számlaegyenlege a következő lesz")
-    public void createAccountAndSetBalance(DataTable dataTable) {
+    public void createAccountAndSetBalance(DataTable dataTable) throws IOException {
         List<Map<String,String>> table = dataTable.asMaps();
         for(Map<String,String> row : table){
             Arrays.asList(
                     row.get("Felhasználó"),
                     row.get("Egyenleg")).forEach(a -> System.out.print(a + " | "));
             System.out.println("");
+
+            checkAccountBalance(row.get("Felhasználó"), Integer.parseInt(row.get("Egyenleg")));
         }
     }
 
