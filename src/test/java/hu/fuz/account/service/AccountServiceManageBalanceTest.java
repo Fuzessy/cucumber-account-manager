@@ -1,4 +1,4 @@
-package hu.fuz.account;
+package hu.fuz.account.service;
 
 import hu.fuz.account.service.AccountService;
 import org.junit.Test;
