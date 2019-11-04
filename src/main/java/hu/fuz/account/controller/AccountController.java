@@ -22,9 +22,7 @@ public class AccountController {
     }
 
     @PostMapping("/add")
-    public void modifyAccount(@RequestBody ModifyAccountDto str){
-        System.out.println(str);
-        return;
-        //accountService.modifyBalance(modifyAccountDto.getUserName(),modifyAccountDto.getAmount());
+    public void modifyAccount(@RequestBody ModifyAccountDto modifyAccountDto){
+        accountService.modifyBalance(modifyAccountDto.getUserName(),modifyAccountDto.getAmount());
     }
 }
